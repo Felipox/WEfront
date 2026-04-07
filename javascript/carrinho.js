@@ -9,10 +9,10 @@ async function finalizarPedido(idProduto, qtd) {
 
     const resposta = await fetch(URL_PEDIDO, {
         method: "POST",
-        headers: { 
+        /*headers: { 
             "Content-Type": "application/json",
             "Authorization": `Bearer ${localStorage.getItem('token_delivery')}` 
-        },
+        },*/
         body: JSON.stringify(dadosPedido)
     });
 

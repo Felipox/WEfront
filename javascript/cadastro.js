@@ -1,4 +1,5 @@
-const URL_REGISTRAR = "https://ahwe.imply.com/fmuller/delivery/registrar";
+
+const URL_REGISTRAR = "https://ahwe.imply.com/fmuller/delivery/registrar?DEBUG=1";
 const form = document.getElementById('form-cadastro');
 
 form.addEventListener('submit', async (e) => {
@@ -14,19 +15,20 @@ form.addEventListener('submit', async (e) => {
     try {
         const resposta = await fetch(URL_REGISTRAR, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            //headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
         });
 
         const resultado = await resposta.json();
 
         if (resposta.ok) {
-            alert("Registo feito com sucesso! Faz agora o login.");
+            alert("Cadastro feito com sucesso");
             window.location.href = "login.html";
         } else {
-            alert("Erro: " + (resultado.message || "Falha no registo"));
+            alert("Erro: " + (resultado.message));
         }
     } catch (erro) {
-        console.error("Erro ao registar:", erro);
+        console.error(erro);
+        alert("Erro de conexão");
     }
 });

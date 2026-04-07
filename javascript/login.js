@@ -12,7 +12,7 @@ formLogin.addEventListener('submit', async (e) => {
     try {
         const resposta = await fetch(URL_LOGIN, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            //headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
         });
 
@@ -22,12 +22,13 @@ formLogin.addEventListener('submit', async (e) => {
             const token = resultado.result.token || resultado.token;
             localStorage.setItem('token_delivery', token);
             
-            alert("Bem-vindo!");
+            alert("Bem-vindo! Redirecionando para o cardápio...");
             window.location.href = "produtos.html";
         } else {
-            alert("Dados inválidos!");
+            alert("Email ou senha incorretos");
         }
     } catch (erro) {
-        console.error("Erro no login:", erro);
+        console.error(erro);
+        alert("Erro de conexão.");
     }
 });

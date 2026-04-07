@@ -3,8 +3,8 @@ const token = localStorage.getItem('token_delivery');
 
 async function carregarEndereco() {
     const resposta = await fetch(URL_ENDERECO, {
-        method: "GET",
-        headers: { "Authorization": `Bearer ${token}` }
+        method: "GET"
+        //headers: { "Authorization": `Bearer ${token}` }
     });
     const dados = await resposta.json();
     if(dados.result) {
@@ -22,10 +22,10 @@ document.getElementById('form-endereco').addEventListener('submit', async (e) =>
 
     await fetch(URL_ENDERECO, {
         method: "POST",
-        headers: { 
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}` 
-        },
+        //headers: { 
+            //"Content-Type": "application/json",
+        //    "Authorization": `Bearer ${token}` 
+      //  },
         body: JSON.stringify(dados)
     });
     alert("Endereço atualizado!");

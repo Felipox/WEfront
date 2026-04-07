@@ -6,11 +6,25 @@
     <title>Cardápio</title>
 </head>
 <body>
+    <a href="index.html" style="text-decoration: none; font-size: 18px;">⬅ Voltar à página principal</a><br><br>
+    
     <h1>O Nosso Cardápio</h1>
     <hr>
 
     <div id="lista-produtos">
         <p>A carregar o cardápio...</p>
+    </div>
+
+    <div id="area-checkout" style="display: none; border: 2px solid green; padding: 15px; margin-top: 20px;">
+        <h2>🛒 Finalizar Compra</h2>
+        <p id="produto-selecionado"></p>
+        <hr>
+        <h3>Endereço de Entrega</h3>
+        <p id="endereco-entrega">Buscando endereço...</p>
+        
+        <a href="endereco.html" style="color: blue;">Editar / Cadastrar meu Endereço</a><br><br>
+        
+        <button onclick="confirmarCompra()" style="background-color: green; color: white; padding: 10px; font-weight: bold; cursor: pointer;">Confirmar Compra</button>
     </div>
 
     <script src="../javascript/produtos.js"></script>
