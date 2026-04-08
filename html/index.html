@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,28 @@
 </head>
 <body>
     <h1>Bem vindo ao WEDelivery</h1>
-    <div>
+
+    <div id="saudacao-usuario" style="margin-bottom: 20px; font-size: 18px; color: darkblue;"></div>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
         <form action="produtos.html" method="get">
-            <h3>Ver Cardápio</h3>
             <input type="submit" value="Ver Cardápio">
         </form>
+
+        <form action="meus_pedidos.html" method="get" id="form-pedidos" style="display: none;">
+            <input type="submit" value="Meus Pedidos">
+        </form>
+
+        <form action="admin.html" method="get" id="form-admin" style="display: none;">
+            <input type="submit" value="Acesso Administrador" style="background-color: darkred; color: white;">
+        </form>
+
+        <button id="btn-sair" onclick="fazerLogout()" style="display: none; padding: 2px 8px; cursor: pointer;">Sair da Conta</button>
     </div>
 
-    <div>
+    <hr>
+
+    <div id="area-visitante">
         <form action="cadastro.html" method="get">
             <h3>Faça seu Cadastro</h3>
             <input type="submit" value="Cadastro">
@@ -23,6 +37,7 @@
         <h3>Já possui uma conta?</h3>
         <a href="login.html">Fazer login</a>
     </div>
-    
+
+    <script src="../javascript/index.js"></script>
 </body>
 </html>

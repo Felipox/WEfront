@@ -32,7 +32,6 @@ document.getElementById('form-endereco').addEventListener('submit', async (e) =>
     try {
         const resposta = await fetch(URL_ENDERECO, {
             method: "POST",
-
             headers: { 
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}` 

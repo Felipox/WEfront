@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Administrador</title>
+
+</head>
+<body>
+    <a href="index.html">Voltar ao Site</a><br><br>
+    
+    <h1>Painel de Controle - Admin</h1>
+    
+    <div class="sessao">
+        <h2>Criar Novo Produto</h2>
+        <form id="form-novo-produto">
+            <input type="text" id="nome-produto" placeholder="Nome do Lanche" required>
+            <input type="number" id="preco-produto" placeholder="Preço (Ex: 25.50)" step="0.01" required>
+            <button type="submit">Adicionar ao Cardápio</button>
+        </form>
+    </div>
+
+    <div class="sessao">
+        <h2>Gerir Cardápio (Deletar)</h2>
+        <div id="lista-admin-produtos">A carregar produtos...</div>
+    </div>
+
+    <div class="sessao">
+        <h2>Expedição de Pedidos</h2>
+        <p>Apenas pedidos prontos para envio.</p>
+        <div id="lista-admin-pedidos">A carregar pedidos do sistema...</div>
+    </div>
+
+    <script src="../javascript/admin.js"></script>
+</body>
+</html>

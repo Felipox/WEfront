@@ -33,8 +33,16 @@ async function carregarCardapio() {
 
 
 function adicionarAoCarrinho(id, nome) {
+    const token = localStorage.getItem('token_delivery');
+    
+    if (!token) {
+        alert("Você precisa de fazer login para comprar um lanche!");
+        window.location.href = "login.html";
+        return;
+    }
+
     produtoAtual = id;
-    document.getElementById('area-checkout').style.display = 'block'; // Mostra a caixa verde
+    document.getElementById('area-checkout').style.display = 'block';
     document.getElementById('produto-selecionado').innerText = "Lanche: " + nome;
     buscarEndereco(); 
 }
@@ -52,8 +60,8 @@ async function buscarEndereco() {
     textoEndereco.innerText = "A buscar na base de dados...";
     try {
         const res = await fetch("https://ahwe.imply.com/fmuller/delivery/endereco?DEBUG=1", {
-            method: "GET"
-            //headers: { "Authorization": `Bearer ${token}` }
+            method: "GET",
+            headers: { "Authorization": `Bearer ${token}` }
         });
         const dados = await res.json();
 
@@ -86,10 +94,10 @@ async function confirmarCompra() {
     try {
         const resposta = await fetch(URL_PEDIDO, {
             method: "POST",
-            //headers: { 
-            //    "Content-Type": "application/json",
-            //    "Authorization": `Bearer ${token}` 
-            //},
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}` 
+            },
             body: JSON.stringify(dadosPedido)
         });
 

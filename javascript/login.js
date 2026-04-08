@@ -12,8 +12,8 @@ formLogin.addEventListener('submit', async (e) => {
     try {
         const resposta = await fetch(URL_LOGIN, {
             method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dados)
-            // lembrar do header depois
         });
 
         const resultado = await resposta.json();
