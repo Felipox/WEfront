@@ -1,6 +1,10 @@
 const URL_ENDERECO = "https://ahwe.imply.com/fmuller/delivery/endereco?DEBUG=1";
 const token = localStorage.getItem('token_delivery');
 
+if (!token) {
+    alert("Acesso Negado! Você precisa fazer login para cadastrar um endereço.");
+    window.location.href = "login.html";
+}
 
 async function carregarEndereco() {
     try {

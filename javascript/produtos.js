@@ -65,7 +65,6 @@ async function buscarEndereco() {
         });
         const dados = await res.json();
 
-        // Se encontrou a rua, escreve na tela
         if(dados.result && dados.result.nome_rua) {
             textoEndereco.innerHTML = `<strong>${dados.result.nome_rua}, ${dados.result.numero_casa} - ${dados.result.nome_bairro}</strong>`;
         } else {

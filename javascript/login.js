@@ -17,18 +17,27 @@ formLogin.addEventListener('submit', async (e) => {
         });
 
         const resultado = await resposta.json();
-
-        const token = resultado.token || (resultado.result ? resultado.result.token : null);
+        const token = resultado.result ? resultado.result.token : null;
 
         if (resposta.ok && token) {
+            
             localStorage.setItem('token_delivery', token);
-            alert("Bem-vindo! Redirecionando para o cardápio...");
-            window.location.href = "produtos.html";
+            localStorage.setItem('email_delivery', dados.email);
+            
+            const emailDigitado = dados.email.toLowerCase();
+            if (emailDigitado.includes('admin') || emailDigitado === 'admin@gmail.com') {
+                localStorage.setItem('tipo_delivery', 'admin');
+            } else {
+                localStorage.setItem('tipo_delivery', 'user');
+            }
+
+            alert("Login efetuado com sucesso!");
+            window.location.href = "index.html"; 
         } else {
-            alert("Email ou senha incorretos (Ou o usuario não existe)");
+            alert("Email ou senha incorretos.");
         }
     } catch (erro) {
         console.error(erro);
-        alert("Erro de conexão.");
+        alert("Erro de conexão com o servidor.");
     }
 });
