@@ -48,13 +48,87 @@ async function carregarProdutosAdmin() {
         container.innerHTML = "";
         lista.forEach(prod => {
             container.innerHTML += `
-                <div style="margin-bottom: 5px;">
-                    <strong>${prod.nome_produto}</strong> - R$ ${prod.preco} 
-                    <button onclick="deletarProduto('${prod.idproduto}')" style="color: red;">Apagar</button>
+                <div id="prod-${prod.idproduto}">
+                    <strong>${prod.nome_produto}</strong> - R$ ${parseFloat(prod.preco).toFixed(2)} 
+                    <button onclick="abrirEdicao('${prod.idproduto}', '${prod.nome_produto}', '${prod.preco}')">Editar</button>
+                    <button onclick="deletarProduto('${prod.idproduto}')">Apagar</button>
                 </div>
             `;
         });
     } catch (e) { container.innerHTML = "Erro ao carregar cardápio."; }
+}
+
+function abrirEdicao(id, nomeAtual, precoAtual) {
+    const divLinha = document.getElementById(`prod-${id}`);
+    
+    divLinha.innerHTML = `
+        <input type="text" id="edit-nome-${id}" value="${nomeAtual}">
+        <input type="number" id="edit-preco-${id}" value="${precoAtual}" step="0.01">
+        <button onclick="salvarEdicao('${id}')">Salvar</button>
+        <button onclick="carregarProdutosAdmin()">Cancelar</button>
+    `;
+}
+
+async function salvarEdicao(id) {
+    const novoNome = document.getElementById(`edit-nome-${id}`).value;
+    const novoPreco = document.getElementById(`edit-preco-${id}`).value;
+
+    if (!novoNome || !novoPreco) {
+        alert("Preencha o nome e o preço!");
+        return;
+    }
+
+    try {
+        const resposta = await fetch(URL_PRODUTO, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ 
+                idproduto: id, 
+                nome_produto: novoNome, 
+                preco: parseFloat(novoPreco) 
+            })
+        });
+
+        if (resposta.ok) {
+            alert("Produto atualizado com sucesso!");
+            carregarProdutosAdmin();
+        } else {
+            alert("O servidor recusou a alteração.");
+        }
+    } catch (e) { alert("Erro de comunicação com o servidor."); }
+}
+
+async function editarProduto(id, nomeAtual, precoAtual) {
+    const novoNome = prompt("Digite o novo nome do produto:", nomeAtual);
+    if (novoNome === null) return;
+
+    const novoPreco = prompt("Digite o novo preço (Ex: 25.50):", precoAtual);
+    if (novoPreco === null) return;
+
+    try {
+        const resposta = await fetch(URL_PRODUTO, {
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ 
+                idproduto: id, 
+                nome_produto: novoNome, 
+                preco: parseFloat(novoPreco) 
+            })
+        });
+
+        if (resposta.ok) {
+            alert("Produto atualizado com sucesso!");
+            carregarProdutosAdmin();
+        } else {
+            alert("Erro ao atualizar o produto.");
+        }
+    } catch (e) { alert("Erro de comunicação com o servidor."); }
 }
 
 async function deletarProduto(id) {
