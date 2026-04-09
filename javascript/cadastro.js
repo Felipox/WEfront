@@ -18,8 +18,6 @@ form.addEventListener('submit', async (e) => {
         });
 
         const resultado = await resposta.json();
-        
-        console.log("O que o WE respondeu:", resultado);
 
         if (resposta.ok && !resultado.error) {
             alert("Cadastro feito com sucesso");

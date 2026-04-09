@@ -17,11 +17,14 @@ formLogin.addEventListener('submit', async (e) => {
         });
 
         const resultado = await resposta.json();
-        const token = resultado.result ? resultado.result.token : null;
 
-        if (resposta.ok && token) {
+        const tokenOriginal = resultado.result ? resultado.result.token : null;
+        const tokenLimpo = tokenOriginal ? tokenOriginal.trim() : null;
+
+        if (resposta.ok && tokenLimpo) {
+
+            localStorage.setItem('token_delivery', tokenLimpo);
             
-            localStorage.setItem('token_delivery', token);
             localStorage.setItem('email_delivery', dados.email);
             
             const emailDigitado = dados.email.toLowerCase();
@@ -37,7 +40,7 @@ formLogin.addEventListener('submit', async (e) => {
             alert("Email ou senha incorretos.");
         }
     } catch (erro) {
-        console.error(erro);
+        console.error("Erro ao fazer login:", erro);
         alert("Erro de conexão com o servidor.");
     }
 });

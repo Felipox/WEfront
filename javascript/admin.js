@@ -31,7 +31,9 @@ document.getElementById('form-novo-produto').addEventListener('submit', async (e
             alert("Produto criado com sucesso!");
             carregarProdutosAdmin();
         } else {
-            alert("Erro ao criar produto. Verifique se você é Admin.");
+            const erroWE = await resposta.text();
+            console.error("Erro:", erroWE);
+            alert("Erro ao criar!");
         }
     } catch (e) { alert("Erro de conexão."); }
 });

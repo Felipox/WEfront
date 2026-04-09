@@ -27,7 +27,7 @@ async function carregarCardapio() {
             container.appendChild(divProduto);
         });
     } catch (erro) {
-        container.innerHTML = "<p>Erro ao carregar. Confirma se a extensão CORS está Verde (ON).</p>";
+        container.innerHTML = "<p>Erro ao carregar</p>";
     }
 }
 
